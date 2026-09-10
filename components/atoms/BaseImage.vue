@@ -1,7 +1,19 @@
 <script setup lang="ts">
-defineProps<{ src: string; alt: string }>()
+import { useRuntimeConfig } from '#imports'
+
+defineProps<{
+  src: string
+  alt: string
+}>()
+
+const config = useRuntimeConfig()
 </script>
 
 <template>
-  <img class="base-image" :src="src" :alt="alt" loading="lazy" />
+  <img
+    class="base-image"
+    :src="`${config.app.baseURL}${src.replace(/^\//, '')}`"
+    :alt="alt"
+    loading="lazy"
+  />
 </template>
